@@ -6,7 +6,7 @@ fn help() {
     println!("    new<title>: create a new task");
     println!("    show: show all tasks from the Database")
 }
-
+//test message
 fn main() {
     let args: Vec<String> = env::args().collect();
 

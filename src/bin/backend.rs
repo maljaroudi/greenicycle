@@ -5,9 +5,15 @@ extern crate rocket;
 
 use mytodo::db::{query_task, establish_connection};
 
-#[get("/tasks")]
+#[get("/items")]
 fn tasks_get() -> String {
-    "this is a response\n".into()
+    let mut response: Vec::<String> = vec![];
+    let conn = establish_connection();
+    //response.push("Product  Category    Recyclable\n");
+    for task in query_task(&conn) {
+        response.push([task._name, "    ".to_string(), task.category, "     ".to_string(), task.recyclable].into_iter().map(|i| i.to_string()).collect::<String>());
+    }
+    response.join("\n")
 }
 
 fn main() {
